@@ -1,0 +1,730 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f4f9;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 165px;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    transition: left 300ms;
+}
+
+.side-header {
+    box-shadow: 0px 5px 5px -5px rgb(0 0 0 /10%);
+    background: var(--main-color);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-header h3, side-head span {
+    color: #fff;
+    font-weight: 400;
+}
+
+.side-content {
+    height: calc(100vh - 60px);
+    overflow: auto;
+}
+
+/* width */
+.side-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.side-content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.side-content::-webkit-scrollbar-thumb {
+  background: #b0b0b0; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.side-content::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+.profile {
+    text-align: center;
+    padding: 2rem 0rem;
+}
+
+.bg-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.profile-img {
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+    margin: 0 auto .5rem auto;
+    border: 3px solid #899DC1;
+}
+
+.profile h4 {
+    color: #000000;
+    font-weight: 500;
+}
+
+.profile small {
+    color: #899DC1;
+    font-weight: 600;
+}
+
+.sidebar {
+    /*overflow-y: auto;*/
+}
+
+.side-menu ul {
+    text-align: center;
+}
+
+.side-menu a {
+    display: block;
+    padding: 1.2rem 0rem;
+}
+
+.logout{
+    cursor: pointer;
+}
+
+/* .side-menu a.active {
+    background: #2B384E;
+}
+
+.side-menu a.active span, .side-menu a.active small {
+    color: #fff;
+} */
+
+.side-menu a span {
+    display: block;
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+.side-menu a span, .side-menu a small {
+    color: #899DC1;
+}
+
+#menu-toggle:checked ~ .sidebar {
+    width: 60px;
+}
+
+#menu-toggle:checked ~ .sidebar .side-header span {
+    display: none;
+}
+
+#menu-toggle:checked ~ .main-content {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+}
+
+#menu-toggle:checked ~ .main-content header {
+    left: 60px;
+}
+
+#menu-toggle:checked ~ .sidebar .profile,
+#menu-toggle:checked ~ .sidebar .side-menu a small {
+    display: none;
+}
+
+#menu-toggle:checked ~ .sidebar .side-menu a span {
+    font-size: 1.3rem;
+}
+
+.main-content {
+    margin-left: 165px;
+    width: calc(100% - 165px);
+    transition: margin-left 300ms;
+}
+
+
+header {
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 165px;
+    z-index: 100;
+    height: 60px;
+    box-shadow: 0px 5px 5px -5px rgb(0 0 0 /10%);
+    background: #fff;
+    transition: left 300ms;
+}
+
+.header-content, .header-menu {
+    display: flex;
+    align-items: center;
+}
+
+.header-content {
+    justify-content: space-between;
+    padding: 0rem 1rem;
+}
+
+.header-content label:first-child span {
+    font-size: 1.3rem;
+}
+
+.header-content label {
+    cursor: pointer;
+}
+
+.header-menu {
+    justify-content: flex-end;
+    padding-top: .5rem;
+}
+
+.container {
+    overflow-y: auto; /* Vertical scrollbar when content exceeds max height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    position: relative;
+    max-width: 950px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 20px auto; /* Maintain margins */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    transition: height 0.3s ease; 
+    box-sizing: border-box;
+}
+
+.form-section {
+    display: none; 
+    margin-top: 15px;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+.form-section.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0%);
+}
+
+.form-section.prev {
+    transform: translateX(-100%);
+}   
+
+.form-section.next {
+    transform: translateX(100%);}
+
+form .buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form .buttons button, .backBtn {
+    margin-right: 14px;
+}
+
+.container header {
+    position: static;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-align: left; /* Align header text to the left */
+}
+
+.container header::before {
+    position: absolute;
+    bottom: -2px;
+    left: 0; /* Align the pseudo-element to the left */
+    height: 3px;
+    width: 27px;
+}
+.container form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 530px;
+    background-color: #fff;
+}
+
+.container form .form {
+    position: absolute;
+    background-color: #fff;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.container form .form.second {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+
+form.secActive .form.second{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0%);
+}
+
+form.secActive .form.first{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+}   
+
+.container form .title {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+
+.container form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px; 
+}
+
+form .fields .input-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(33.333% - 15px); 
+    margin: 4px 0;
+    min-width: 200px; 
+}
+
+@media (max-width: 750px) {
+    form .fields .input-field {
+        flex: 1 1 calc(50% - 10px); 
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field {
+        flex: 1 1 100%; 
+    }
+}
+
+.input-field label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.input-field input {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+.input-field select,
+.input-field input[type="date"],
+.input-field input[type="text"],
+.input-field input[type="number"] {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.input-field input[type="date"] {
+    color: #707070;
+}
+
+.input-field input[type="date"]:valid {
+    color: #333;
+}
+
+.input-field select {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 10px;
+    height: 42px;
+    margin: 8px 0;
+    display: inline-block;
+    visibility: visible;
+}
+
+.container form button , .backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 25px 0;
+    background-color: #0093CB;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+.container form button,
+.container form .backBtn {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+form button:hover {
+    background-color: #265df2;
+}
+
+form button i,
+form .backBtn i {
+    margin: 0 6px;
+}
+
+form .backBtn i {
+    transform: rotate(180deg);
+}
+
+form .buttons {
+    display: flex;
+    align-items: center;
+}
+
+form .buttons button , .backBtn {
+    margin-right: 14px;
+}
+
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #0093CB;
+    border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #007bb5;
+}
+
+@media (max-width: 750px) {
+
+    .container {
+        padding: 20px; 
+    }
+
+    .container form {
+        overflow-y: scroll;
+    }
+    .container form::-webkit-scrollbar {
+        display: none;
+    }
+    form .fields .input-field {
+        width: calc(100% / 2 - 10px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field {
+        width: 100%;
+    }
+}
+
+/* THIS CSS IS FOR THE MODALS */
+
+/* MODAL STYLING */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 3% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; 
+    max-width: 900px; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* FORM SECTION MEMBER */
+
+.form-section-member {
+    margin-bottom: 20px;
+}
+
+.form-section-member header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-align: left; /* Align header text to the left */
+}
+
+/* FLEXBOX STYLING FOR INPUT FIELDS */
+
+.details.member {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+}
+
+.pop-input-field {
+    flex: 1 1 calc(50% - 20px); 
+    min-width: 300px; 
+}
+
+.pop-input-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.pop-input-field input,
+.pop-input-field select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* BUTTONS */
+
+.pop-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pop-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50; 
+    color: white;
+    cursor: pointer;
+}
+
+.pop-buttons button#closeModal {
+    background-color: #f44336; 
+}
+
+.pop-buttons button:hover {
+    opacity: 0.9;
+}
+
+/* THIS IS FOR THE TABLE DESIGN */
+
+#resultsTableContainer {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#resultsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#resultsTable th, #resultsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#resultsTable th {
+    background-color: #f2f2f2;
+}
+
+#resultsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#resultsTableContainer button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#resultsTableContainer button:hover {
+    background-color: #45a049;
+}
+
+#table-wrapper {
+    overflow-x: auto; 
+    width: 100%; 
+}
+
+
+.button-group {
+    display: flex; 
+    gap: 5px; 
+}
+
+.button-group button {
+    padding: 6px 12px; 
+    margin: 0; 
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    flex-grow: 1; 
+    text-align: center;
+}
+
+.button-group button:hover {
+    background-color: #ddd;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 4px;
+    background-color: #007bff; 
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #0056b3; 
+}
+
+.input-field .checkbox-group {
+    display: grid; 
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 10px 15px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    border-radius: 5px; 
+    padding: 10px; 
+}
+
+.input-field .checkbox-group div {
+    display: flex;
+    align-items: center; 
+}
+
+.input-field .checkbox-group label {
+    margin-left: 5px; 
+    font-size: 14px; 
+}
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between checkboxes */
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+    -webkit-appearance: none; /* For Safari */
+    appearance: none; /* Reset default appearance */
+
+    border: 2px solid #333;
+    border-radius: 4px; /* Rounded corners for a custom look */
+    background-color: white;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+    background-color: #0093CB; /* Checked state color */
+}
+
+.checkbox-group label {
+    font-size: 16px;
+    margin-left: 5px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group div {
+    display: flex;
+    align-items: center;
+}
+
+
+.input-field-container {
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px; 
+}
